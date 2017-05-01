@@ -1,0 +1,59 @@
+【SDK版本更新】Android SDK 5.6.0
+时间：2017年02月16日
+
+Change Log：
+
+1. 简化SDK内部逻辑，下线部分无用接口；
+2. 优化SDK解绑逻辑，避免无效解绑问题；
+3. 新增异常统计功能，增强系统健壮性；
+4. 修复部分已知bug，进一步提高稳定性；
+
+升级提示：
+强烈建议开发者升级。
+
+升级指南：
+步骤一：版本升级
+
+使用4.4.0及以后版本的开发者请直接参照步骤二和步骤三；
+使用4.3.0及以前版本的开发者，请阅读SDK下载包docs目录下的《升级指南》。
+
+步骤二：更改回调Receiver和Manifest.xml
+5.2.0版本的AndroidManifest.xml中PushInfoProvider新增权限级别，如下所示：
+	<provider
+	  android:name="com.baidu.android.pushservice.PushInfoProvider"
+	  android:authorities=" YourPackageName.bdpush"
+	  android:writePermission="baidu.push.permission.WRITE_PUSHINFOPROVIDER. YourPackageName "
+	  android:protectionLevel = "signature"
+	  android:exported="true" />
+
+5.1.0版本新增了PushInfoProvider ContentProvider的声明,并增加了ContentProvider的写权限声明，示例如下：
+<!-- 适配Android N系统必需的ContentProvider写权限声明，写权限包含应用包名-->
+	<uses-permission android:name="baidu.push.permission.WRITE_PUSHINFOPROVIDER.YourPackageName" />
+    <permission
+        android:name="baidu.push.permission.WRITE_PUSHINFOPROVIDER.YourPackageName"
+        android:protectionLevel="normal">
+    </permission>
+
+<!-- 适配Android N系统必需的ContentProvider声明，写权限包含应用包名-->
+    <provider
+	android:name="com.baidu.android.pushservice.PushInfoProvider"
+	android:authorities="YourPackageName.bdpush"
+	android:writePermission="baidu.push.permission.WRITE_PUSHINFOPROVIDER.YourPackageName"
+	android:exported="true" />
+
+4.6.3版本去掉了PushKeepAlive Activity的声明，如果您声明了该Activity，请删除。
+4.5.1版本去掉了Frontia相关类，如果您初始化了FrontiaApplication，请删除。
+4.5.1版本的自定义Receiver继承父类修改为PushMessageReceiver。
+4.4.1版本的自定义Receiver中增加回调函数onNotificationArrived，声明如下：
+    public void onNotificationArrived(Context context, String title, String description, String customContentString) { }
+
+4.4.0版本的AndroidManifest.xml中增加一个必选Service声明：
+<service android:name="com.baidu.android.pushservice.CommandService"
+android:exported="true" />
+
+步骤三：更新so库和jar包
+
+1、请将libs目录下armeabi目录下原有的libbdpush_V*_*.so，替换为最新的libbdpush_V2_7.so。
+注：如果你的工程中还使用了其他的.so文件，只需要复制云推送对应目录下的so文件。
+
+2、请将jar包替换为最新的pushservice-5.6.0.30.jar。
