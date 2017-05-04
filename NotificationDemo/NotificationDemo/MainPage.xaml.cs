@@ -9,9 +9,17 @@ namespace NotificationDemo
 {
     public partial class MainPage : ContentPage
     {
+        
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            var title= this.tbTitle.Text;
+            var dsc = this.tbDsc.Text;
+            
         }
     }
 }

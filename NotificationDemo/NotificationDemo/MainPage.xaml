@@ -7,5 +7,10 @@
 	<Label Text="Welcome to Xamarin Forms!" 
            VerticalOptions="Center" 
            HorizontalOptions="Center" />
+    <StackLayout>
+        <Entry x:Name="tbTitle"/>
+        <Entry x:Name="tbDsc"></Entry>
+        <Button BackgroundColor="Azure" Text="Send" Clicked="Button_Clicked"></Button>
+    </StackLayout>
 
 </ContentPage>

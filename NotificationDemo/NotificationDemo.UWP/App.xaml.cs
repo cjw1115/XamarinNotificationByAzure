@@ -14,6 +14,10 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.WindowsAzure.Messaging;
+using System.Threading.Tasks;
+using Windows.Networking.PushNotifications;
+using Windows.UI.Popups;
 
 namespace NotificationDemo.UWP
 {
@@ -39,6 +43,7 @@ namespace NotificationDemo.UWP
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            InitNotificationsAsync();
 
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
@@ -103,5 +108,26 @@ namespace NotificationDemo.UWP
             //TODO: Save application state and stop any background activity
             deferral.Complete();
         }
+        private async void InitNotificationsAsync()
+        {
+            var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+
+            var hub = new NotificationHub(ConfigurationSettings.HUB_NAME,ConfigurationSettings.HUB_CONNEXTION_STRING);
+            var result = await hub.RegisterNativeAsync(channel.Uri);
+
+            // Displays the registration ID so you know it was successful
+            if (result.RegistrationId != null)
+            {
+                var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
+                dialog.Commands.Add(new UICommand("OK"));
+                await dialog.ShowAsync();
+            }
+
+        }
+    }
+    public class ConfigurationSettings
+    {
+        public static readonly string HUB_NAME = "";
+        public static readonly string HUB_CONNEXTION_STRING = "";
     }
 }

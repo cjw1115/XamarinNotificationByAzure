@@ -259,3 +259,5 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/azure-messaging-1.2.5.2/component/icons
+/azure-messaging-1.2.5.2/component
