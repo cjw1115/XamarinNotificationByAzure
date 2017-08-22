@@ -137,11 +137,11 @@
     <AndroidResource Include="Resources\values\styles.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\AndroidBinding\BaiduNotification\BaiduNotification.csproj">
+    <ProjectReference Include="..\..\BaiduNotification\BaiduNotification.csproj">
       <Project>{f0827266-b7b7-4b98-bde4-bdfb30a149aa}</Project>
       <Name>BaiduNotification</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\AndroidBinding\JPushNotification\JPushNotification.csproj">
+    <ProjectReference Include="..\..\JPushNotification\JPushNotification.csproj">
       <Project>{ae9e5b5e-a3e9-4820-bb8a-8a5193c7da0e}</Project>
       <Name>JPushNotification</Name>
     </ProjectReference>
